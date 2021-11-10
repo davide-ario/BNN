@@ -1,2 +1,2 @@
 # BNN
-Bayesian Neural Network
+Bayesian Neural Network, PAramteric BNN and Nested BNN. 
