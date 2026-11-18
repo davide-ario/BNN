@@ -22,6 +22,7 @@ mini-batch variational inference (ADVI).
 | [`Nested-BayesianNN.ipynb`](Nested-BayesianNN.ipynb) | Nested BNN with per-variable model selection on a strongly non-linear, confounded process; comparison with OLS and a standard BNN; marginal effects with 90% credible bands. |
 | [`BNN_returns_to_education.ipynb`](BNN_returns_to_education.ipynb) | **Real data** (CPS 2004, 61,395 full-time workers): is the return to a year of schooling constant? Marginal return to each year, with heterogeneity by gender and age, compared with the Mincer equation and an OLS regression with one dummy per education level; nested-BNN and multi-seed robustness check. |
 | [`BNN_returns_to_education_card.ipynb`](BNN_returns_to_education_card.ipynb) | **Real data** (Card 1995, 3,010 young men, with family background, IQ and an instrument): sheepskin effects, ability bias, IV, network size vs sample size, and double machine learning with a BNN to handle controls correlated with schooling. |
+| [`BNN_latent_ability_card.ipynb`](BNN_latent_ability_card.ipynb) | **Real data** (Card 1995): ability as a latent variable measured by IQ and KWW, in a Bayesian factor model of schooling and wages estimated by MCMC, with linear or BNN control functions. |
 | `BNN_gender_gap*.ipynb` | Application of the nested BNN to the gender wage gap (data not included in the repository). |
 
 ## Main results (simulated data, out of sample)
@@ -71,6 +72,16 @@ mini-batch variational inference (ADVI).
   downwards (6.1%), because the controls are correlated with schooling.
   **Double machine learning with the BNN** as the flexible model removes the
   bias (6.95%, in line with OLS, random-forest and boosting estimates).
+
+## Ability as a latent variable (Card data)
+
+* Treating IQ and KWW as noisy measurements of a latent ability factor
+  lowers the return to schooling to **4.3–5.0% per year**, against 7.2% for
+  OLS and 5.8% for OLS with test-score controls: the controls under-correct
+  because the tests are only about 60% reliable.
+* The KWW test partly reflects schooling at the time it was taken; the
+  notebook shows how its treatment moves the estimate (2.3% to 5.0%).
+* A BNN control function in the wage equation changes little (4.0%).
 
 ## Code
 
