@@ -20,7 +20,7 @@ mini-batch variational inference (ADVI).
 |---|---|
 | [`Bayesian_NN.ipynb`](Bayesian_NN.ipynb) | Linear regression vs BNN vs partially linear BNN; recovery of a coefficient with non-linear controls; learned partial-dependence curves. |
 | [`Nested-BayesianNN.ipynb`](Nested-BayesianNN.ipynb) | Nested BNN with per-variable model selection on a strongly non-linear, confounded process; comparison with OLS and a standard BNN; marginal effects with 90% credible bands. |
-| [`BNN_returns_to_education.ipynb`](BNN_returns_to_education.ipynb) | **Real data** (CPS 2004, 61,395 full-time workers): is the return to a year of schooling constant? Marginal return to each year, with heterogeneity by gender and age, compared with the Mincer equation and an OLS regression with one dummy per education level. |
+| [`BNN_returns_to_education.ipynb`](BNN_returns_to_education.ipynb) | **Real data** (CPS 2004, 61,395 full-time workers): is the return to a year of schooling constant? Marginal return to each year, with heterogeneity by gender and age, compared with the Mincer equation and an OLS regression with one dummy per education level; nested-BNN and multi-seed robustness check. |
 | `BNN_gender_gap*.ipynb` | Application of the nested BNN to the gender wage gap (data not included in the repository). |
 
 ## Main results (simulated data, out of sample)
@@ -54,6 +54,9 @@ mini-batch variational inference (ADVI).
 * The BNN finds, without being told to look for it, that college pays more
   for women (12.1% vs 8.8% per year between 12 and 16 years of schooling).
 * With flexible controls, the average return (9.5%) is close to Mincer's.
+* The nested BNN fits no better than the standard BNN on these data. Refitting
+  with five seeds shows that single-run ADVI intervals are about half as
+  wide as they should be; the main findings survive.
 
 ## Code
 
