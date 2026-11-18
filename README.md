@@ -21,7 +21,7 @@ mini-batch variational inference (ADVI).
 | [`Bayesian_NN.ipynb`](Bayesian_NN.ipynb) | Linear regression vs BNN vs partially linear BNN; recovery of a coefficient with non-linear controls; learned partial-dependence curves. |
 | [`Nested-BayesianNN.ipynb`](Nested-BayesianNN.ipynb) | Nested BNN with per-variable model selection on a strongly non-linear, confounded process; comparison with OLS and a standard BNN; marginal effects with 90% credible bands. |
 | [`BNN_returns_to_education.ipynb`](BNN_returns_to_education.ipynb) | **Real data** (CPS 2004, 61,395 full-time workers): is the return to a year of schooling constant? Marginal return to each year, with heterogeneity by gender and age, compared with the Mincer equation and an OLS regression with one dummy per education level; nested-BNN and multi-seed robustness check. |
-| [`BNN_returns_to_education_card.ipynb`](BNN_returns_to_education_card.ipynb) | **Real data** (Card 1995, 3,010 young men, with family background, IQ and an instrument): sheepskin effects, ability bias, IV, and a double-machine-learning cross-check of the BNN estimates. |
+| [`BNN_returns_to_education_card.ipynb`](BNN_returns_to_education_card.ipynb) | **Real data** (Card 1995, 3,010 young men, with family background, IQ and an instrument): sheepskin effects, ability bias, IV, network size vs sample size, and double machine learning with a BNN to handle controls correlated with schooling. |
 | `BNN_gender_gap*.ipynb` | Application of the nested BNN to the gender wage gap (data not included in the repository). |
 
 ## Main results (simulated data, out of sample)
@@ -65,10 +65,12 @@ mini-batch variational inference (ADVI).
   degree years (12th, 16th, 18th): clear sheepskin effects.
 * IQ and test scores explain about a fifth of the OLS return (ability bias),
   a result that holds with OLS, double machine learning and the BNN.
-* On this small sample the BNNs under-fit and bias the return downwards
-  (5.6% against 7.1–7.4% for OLS and double ML). The nested BNN is unstable
-  across seeds. The notebook documents both: it is a useful counter-example
-  to the CPS results.
+* The 3 × 30 network that suited the CPS under-fits this small sample; a
+  2 × 10 network matches OLS out of sample.
+* Fitting the return jointly with a network on the controls biases it
+  downwards (6.1%), because the controls are correlated with schooling.
+  **Double machine learning with the BNN** as the flexible model removes the
+  bias (6.95%, in line with OLS, random-forest and boosting estimates).
 
 ## Code
 
