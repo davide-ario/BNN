@@ -2,8 +2,8 @@
 
 Bayesian neural networks (BNNs) predict well when the functional form is
 unknown, but economists also need interpretable effects with uncertainty.
-This repository explores two ways to get both, on simulated data where the
-true model is known:
+This repository explores two ways to get both, first on simulated data where
+the true model is known and then on real wage data:
 
 * a **partially linear BNN**, $Y = \alpha + \beta X_0 + f(X_{-0}) + \varepsilon$,
   which keeps a regression coefficient for the variable of interest and lets
@@ -20,6 +20,7 @@ mini-batch variational inference (ADVI).
 |---|---|
 | [`Bayesian_NN.ipynb`](Bayesian_NN.ipynb) | Linear regression vs BNN vs partially linear BNN; recovery of a coefficient with non-linear controls; learned partial-dependence curves. |
 | [`Nested-BayesianNN.ipynb`](Nested-BayesianNN.ipynb) | Nested BNN with per-variable model selection on a strongly non-linear, confounded process; comparison with OLS and a standard BNN; marginal effects with 90% credible bands. |
+| [`BNN_returns_to_education.ipynb`](BNN_returns_to_education.ipynb) | **Real data** (CPS 2004, 61,395 full-time workers): is the return to a year of schooling constant? Marginal return to each year, with heterogeneity by gender and age, compared with the Mincer equation and an OLS regression with one dummy per education level. |
 | `BNN_gender_gap*.ipynb` | Application of the nested BNN to the gender wage gap (data not included in the repository). |
 
 ## Main results (simulated data, out of sample)
@@ -41,6 +42,18 @@ mini-batch variational inference (ADVI).
 * Both notebooks also show the limits: neither model removes omitted-variable
   bias, and effects that are small relative to the outcome are shrunk towards
   zero.
+
+## Returns to schooling (real data)
+
+* The return per year of schooling is far from constant. It peaks at the
+  completion of high school and the first year of college (13–20% per
+  year) and falls to about 5–8% per year for graduate degrees. The Mincer
+  equation estimates a constant 9.3%.
+* Below 12 years the profile is step-shaped (a sheepskin effect at the
+  diploma); above 13 years, returns diminish with each further degree.
+* The BNN finds, without being told to look for it, that college pays more
+  for women (12.1% vs 8.8% per year between 12 and 16 years of schooling).
+* With flexible controls, the average return (9.5%) is close to Mincer's.
 
 ## Code
 
